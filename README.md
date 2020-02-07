@@ -1,6 +1,6 @@
-# the Hound
+# the Hound - AWS CFN converter
 
-The hound is a simple java application that aims to convert your YAML Cloudformation templates into useful README files.  
+The hound is a simple java application that aims to convert your AWS YAML Cloudformation templates into useful README files.  
 
 ## How does it work?
 This app parses the YAML template and works its way through the sections.  It documents:
