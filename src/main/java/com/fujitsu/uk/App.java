@@ -10,12 +10,19 @@ import java.io.File;
 
 public class App {
     public static void main(String[] args) {
-        if(args.length == 1){
+        if(args.length >= 1){
             File file;
             try{
                 file =  new File(args[0]);
-                new MarkdownGen(file.getParent() + "/README.md").generateMarkdownForYamlFile(file);
-                File readmeFile = new File(file.getParent() + "/README.md");
+                String outputFile = file.getParent() + "/README.md";
+                try{
+                    outputFile = args[1];
+                    System.out.println("Output path provided, so using " + outputFile);
+                }catch(ArrayIndexOutOfBoundsException aiofbe){
+                    System.out.println("No output file or path supplied so using default");
+                }
+                new MarkdownGen(outputFile).generateMarkdownForYamlFile(file);
+                File readmeFile = new File(outputFile);
                 if (readmeFile.exists()){
                     System.out.println("Successfully created README.md file " + readmeFile.getAbsolutePath());
                 }
