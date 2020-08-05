@@ -13,6 +13,7 @@ import java.util.Map;
 
 import static com.fujitsu.uk.utilities.Constants.*;
 
+
 public class MarkdownGen {
 
     private String readmeFilePath;
@@ -28,7 +29,12 @@ public class MarkdownGen {
             ObjectMapper yamlReader = new ObjectMapper(new YAMLFactory());
             HashMap obj = yamlReader.readValue(yaml, HashMap.class);
 
-            writeMarkdownLineToFile("# " + yaml.getName());
+            String fileName = yaml.getName();
+            String noExtFilename = fileName.indexOf(".") > 0 ?
+                    fileName.substring(0, fileName.lastIndexOf(".")) :
+                    fileName;
+
+            writeMarkdownLineToFile("# " + noExtFilename);
 
             if(obj.containsKey(DESCRIPTION)) {
                 processDescription((String)obj.get(DESCRIPTION));
