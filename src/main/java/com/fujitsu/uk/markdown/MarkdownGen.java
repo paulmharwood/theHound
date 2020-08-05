@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import com.fujitsu.uk.utilities.Constants.*;
 
 import static com.fujitsu.uk.utilities.Constants.*;
 
@@ -91,7 +90,11 @@ public class MarkdownGen {
             for (Map.Entry<String, String> outputInfo : value.entrySet()) {
                 switch (outputInfo.getKey()) {
                     case "Value":
-                        tableEntry += tableEntry + "|" + outputInfo.getValue();
+                        if(outputInfo.getValue() instanceof String){
+                            tableEntry += "|" + outputInfo.getValue();
+                        }else{
+                            tableEntry += "| !Ref ";
+                        }
                         break;
                 }
             }
